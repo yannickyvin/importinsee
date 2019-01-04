@@ -81,27 +81,6 @@ public class BatchConfiguration {
 	        return new CommuneItemProcessor();
 	    }
 	    
-	   /* 
-	    @Bean
-	    public FlatFileItemWriter<Commune> itemWriter() {
-	            return  new FlatFileItemWriterBuilder<Commune>()
-	                                       .name("itemWriter")
-	                                       .resource(new ClassPathResource("output.txt"))
-	                                       .lineAggregator(new PassThroughLineAggregator<>())
-	                                       .build();
-	    }
-	    */
-/*
-	    @Bean
-	    public JdbcBatchItemWriter<Commune> writer(DataSource dataSource) {
-	        return new JdbcBatchItemWriterBuilder<Commune>()
-	            .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-	            .sql("INSERT INTO people (first_name, last_name) VALUES (:firstName, :lastName)")
-	            .dataSource(dataSource)
-	            .build();
-	    }
-	    */
-	    
 	    @Bean
 	    public JpaItemWriter<Commune> writer() {
 	        JpaItemWriter<Commune> communeJpaItemWriter = new JpaItemWriter<>();
