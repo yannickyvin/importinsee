@@ -15,26 +15,14 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 
 	private static final Logger log = LoggerFactory.getLogger(JobCompletionNotificationListener.class);
 
-	private final JdbcTemplate jdbcTemplate;
-	
 	@Autowired
     CommuneRepository communeRepository;
-
-	@Autowired
-	public JobCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
 
 	@Override
 	public void afterJob(JobExecution jobExecution) {
 		if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
 			log.info("!!! JOB FINISHED! Time to verify the results");
 			communeRepository.findAll().forEach(commune -> log.info("Found<" + commune + "in the database"));
-/*
-			Integer rowcount = jdbcTemplate.queryForObject("SELECT count(nom) FROM communes", Integer.class);
-			
-			log.info("!!! Nombre d'enregistrements=" + rowcount);*/
-
 		}
 	}
 }
